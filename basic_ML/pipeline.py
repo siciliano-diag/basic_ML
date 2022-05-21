@@ -1,7 +1,7 @@
 #IMPORTS
 import types
 
-import .util_cfg
+from . import util_cfg
 from .util_pipeline import set_to_self_methods
 
 class Pipeline():
