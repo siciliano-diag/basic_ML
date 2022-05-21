@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 install_requires = []
 if os.path.isfile("requirements.txt"):
-    with open(requirementPath) as f:
+    with open("requirements.txt") as f:
         install_requires = f.read().splitlines()
 
 setup(
