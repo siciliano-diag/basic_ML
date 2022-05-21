@@ -1,8 +1,8 @@
 #IMPORTS
 import types
 
-import util_cfg
-from util_pipeline import set_to_self_methods
+import .util_cfg
+from .util_pipeline import set_to_self_methods
 
 class Pipeline():
 	def __init__(self):

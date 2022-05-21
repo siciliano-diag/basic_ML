@@ -1,7 +1,7 @@
 #IMPORTS
 import os
 
-import util_data
+import .util_data
 
 '''
 def load_packages(self, package_name): #IMPORT MODEL-SPECIFIC SCRIPTS
