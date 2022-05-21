@@ -3,6 +3,7 @@ import os
 
 import util_data
 
+'''
 def load_packages(self, package_name): #IMPORT MODEL-SPECIFIC SCRIPTS
 	self.packages = {}
 	try:
@@ -10,6 +11,7 @@ def load_packages(self, package_name): #IMPORT MODEL-SPECIFIC SCRIPTS
 		print("PACKAGE IMPORTED CORRECTLY")
 	except ModuleNotFoundError:
 		print("PACKAGE", package_name, "NOT FOUND;","CONTINUE PIPELINE")
+'''
 
 def load_data(self, *args, **kwargs):
 	return util_data.load_data(*args, **kwargs)

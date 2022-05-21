@@ -1,5 +1,6 @@
 #IMPORTS
 import types
+from util_pipeline import set_to_self_methods
 
 def set_to_self_methods(self, package_name):
 	module = __import__(package_name)
