@@ -7,7 +7,6 @@ install_requires = []
 if os.path.isfile("requirements.txt"):
     with open(requirementPath) as f:
         install_requires = f.read().splitlines()
-setup(name="yourpackage", , [...])
 
 setup(
     name='basic_ML',
