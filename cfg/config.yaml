@@ -1,0 +1,55 @@
+
+verbose: True
+
+data:
+    name: [australian, german, heart]
+    from: uci #uci #tfds #custom #path_to_local_file
+    val_size: 0.2 #relative to remaining data after test split
+    test_size: 0.2
+    re_split_test: False
+    standardize: True
+    seed: ${exp.seed}
+
++ model: nn
+
+#log:
+#    - accuracy
+
+#PIPELINE PARAMETERS; NOT SAVED AS PART OF THE CONFIG
+exp:
+    name: prova
+    rewrite: True
+    seed: 21094
+    prj_fld: ../ #project folder, used to locate folders
+
+pipeline:
+    - load_packages:
+        args:
+            - model.${model.name}
+    - sweep data.name:
+        - load_data:
+            kwargs: ~{data}
+            outs:
+                - data.dataset
+                - data.scaler
+        #- if check_experiment:
+        #    True:
+        #        - repeat 10:
+        #            - create_model:
+        #                outs:
+        #                    - model.model
+        #            - train_model
+        #- compute_metrics
+
+
+
+
+#special characters/words:
+#+ --> load other config file
+#optional --> doesn't give error if not found
+#${} : reference to another key
+#~{} : reference to another key in self, but not during cfg setup
+#_global_: special key --> raise to global config
+#sweep parameter --> sweeps parameter
+#repeat n --> repeats successive pipeline n times
+#args, kwargs, out

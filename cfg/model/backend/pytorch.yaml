@@ -1,0 +1,11 @@
+name: pytorch
+
+# @package _global_
+model:
+    params:
+        units_per_hidden_layer: #consider only hidden units, last layer units are based on y shape
+            - 400
+            - 400
+            - 400
+            - 400
+            - 400

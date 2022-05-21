@@ -1,0 +1,29 @@
+# @package _group_
+name: tensorflow
+
+# @package 
+_global_:
+    model:
+        units_per_layer: #consider only hidden units, last layer units are based on y shape
+            - 400
+            - 400
+            - 400
+        layer_args:
+            kernel_initializer: normal
+            bias_initializer: zeros
+            activation: relu
+
+        compiler:
+            loss: entropy #binary or categorical will be selected after data loading
+            optimizer:
+                name: "adam"
+            metrics:
+            - accuracy
+
+        
+        training:
+            epochs: 100
+            class_weight: True #If True, will be computed
+            verbose: 1 #Will also be used for Pipeline prints
+            #callbacks = lambda : [CustomEarlyStopping(monitor = 'loss', patience = 100, tol=0.01,
+            #                         verbose = verbose, restore_best_weights = True)] #lambda is needed to re-initialize it
