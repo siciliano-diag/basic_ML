@@ -1,8 +1,8 @@
 #IMPORTS
 import types
 
-def set_to_self_methods(self, package_name):
-	module = __import__(".", fromlist=[package_name])
+def set_to_self_methods(self, module):
+	#module = __import__(".", fromlist=[package_name])
 	for method_name in dir(module):
 		method = getattr(module,method_name)
 		if isinstance(method, types.FunctionType):

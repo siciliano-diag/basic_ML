@@ -2,12 +2,13 @@
 import types
 
 from . import util_cfg
-from .util_pipeline import set_to_self_methods
+from . import util_pipeline #import set_to_self_methods
+from . import pipeline_methods
 
 class Pipeline():
 	def __init__(self):
-		set_to_self_methods(self, "util_pipeline")
-		set_to_self_methods(self, "pipeline_methods")
+		util_pipeline.set_to_self_methods(self, util_pipeline)
+		util_pipeline.set_to_self_methods(self, pipeline_methods)
 
 		self.cfg = util_cfg.load_configuration()
 
