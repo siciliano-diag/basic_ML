@@ -39,8 +39,6 @@ class Pipeline():
 
 			if " " in command_name: #check if special words
 				command_split = command_name.split(" ")
-				if len(command_split)>2:
-					print("!!!ERROR: COMMAND LENGTH>2!!!")
 				
 				if command_split[0]=="sweep":
 					key = command_split[1]
@@ -52,7 +50,15 @@ class Pipeline():
 					self.cfg.set_composite_key(key,sweep_params) #revert key change to original sweep params
 				elif command_split[0]=="repeat":
 					num_repeats = int(command_split[1])
+					if not hasattr(self,repeats):
+						self.repeats = {}
+					if len(command_split)>2:
+						repeat_key = command_split[2]
+					else:
+						repeat_key = len(self.repeats)
+
 					for repeat_i in range(num_repeats):
+						self.repeats[repeat_key] = repeat_i
 						out = self.run(pipeline = command[command_name])
 				elif command_split[0]=="if":
 					bool_value = self.run(pipeline = [command_split[1]])

@@ -23,7 +23,7 @@ exp:
     prj_fld: ../ #project folder, used to locate folders
 
 pipeline:
-    - load_packages:
+    - set_to_self_methods:
         args:
             - model.${model.name}
     - sweep data.name:
@@ -32,13 +32,13 @@ pipeline:
             outs:
                 - data.dataset
                 - data.scaler
-        #- if check_experiment:
-        #    True:
-        #        - repeat 10:
-        #            - create_model:
-        #                outs:
-        #                    - model.model
-        #            - train_model
+        - if check_experiment:
+            True:
+                - repeat 10:
+                    - create_model:
+                        outs:
+                            - model.model
+                    - train_model
         #- compute_metrics
 
 
