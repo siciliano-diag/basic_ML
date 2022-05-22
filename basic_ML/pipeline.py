@@ -39,7 +39,6 @@ class Pipeline():
 
 			if " " in command_name: #check if special words
 				command_split = command_name.split(" ")
-				
 				if command_split[0]=="sweep":
 					key = command_split[1]
 					sweep_params = self.cfg.get_composite_key(key)
@@ -60,6 +59,7 @@ class Pipeline():
 					for repeat_i in range(num_repeats):
 						self.repeats[repeat_key] = repeat_i
 						out = self.run(pipeline = command[command_name])
+					self.repeats.pop(repeat_key, None)
 				elif command_split[0]=="if":
 					bool_value = self.run(pipeline = [command_split[1]])
 					if bool_value in command[command_name]:

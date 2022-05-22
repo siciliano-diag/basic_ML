@@ -2,16 +2,35 @@ import yaml
 import os
 import numpy as np
 import re
+import argparse
 
+def load_configuration():
+	args = parse_arguments()
+	
+	config_path = args.pop('config_path', None)
+	config_name = args.pop('config_name', None)
 
-def load_configuration(config_path="../cfg", config_name="config"):
 	cfg = load_yaml(config_path, config_name)
 
 	cfg = handle_globals(cfg)
 
 	cfg = handle_relatives(cfg, cfg)
 
+	for k,v in args:
+		cfg.set_composite_key(k,v)
+
 	return cfg
+
+def parse_arguments():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--config_path", default = "../cfg")
+	parser.add_argument("--config_name", default = "config")
+	parsed, unknown = parser.parse_known_args()
+	for arg in unknown:
+		if arg.startswith(("-", "--")):
+			parser.add_argument(arg.split('=')[0])
+	args = parser.parse_args()
+	return args
 
 def load_yaml(config_path, config_name):
 	with open(os.path.join(config_path,config_name+".yaml"), 'r') as f:
@@ -130,15 +149,6 @@ class ConfigObject(dict):
 		# 		v = dotdict(v)
 
 	def get_composite_key(self, relative_key):
-		try:
-			value = self
-			for key in relative_key.split("."):
-				value = value[key]
-		except KeyError:
-			value = "${"+relative_key+"}"
-		return value
-	
-	def set_composite_key(self, relative_key, set_value):
 		try:
 			value = self
 			for key in relative_key.split("."):

@@ -1,3 +1,5 @@
+import os
+
 from setuptools import setup
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -14,7 +16,7 @@ setup(
     description='Basic Machine LEarning',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    version='0.0.1',
+    version='0.0.3',
     install_requires=install_requires,
     url='https://github.com/siciliano-diag/basic_ML.git',
     author='siciliano-diag',
