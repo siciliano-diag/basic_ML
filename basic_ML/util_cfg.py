@@ -30,7 +30,7 @@ def parse_arguments():
 		if arg.startswith(("-", "--")):
 			parser.add_argument(arg.split('=')[0])
 	args = parser.parse_args()
-	return args
+	return vars(args)
 
 def load_yaml(config_path, config_name):
 	with open(os.path.join(config_path,config_name+".yaml"), 'r') as f:
