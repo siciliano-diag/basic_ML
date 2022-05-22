@@ -16,7 +16,8 @@ def load_configuration():
 
 	cfg = handle_relatives(cfg, cfg)
 
-	for k,v in args:
+	print(args)
+	for k,v in args.items():
 		cfg.set_composite_key(k,v)
 
 	return cfg
