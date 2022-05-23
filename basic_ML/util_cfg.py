@@ -121,20 +121,18 @@ def merge_dicts(a, b, path=None):
 def handle_reference(cfg, obj, char="$"):
 	matches = [match for match in re.finditer(re.escape(char)+r"\{(.*?)\}",obj)]
 	print(matches)
-	'''
 	if len(matches) == 1:
 		match = matches[0]
 		start_idx, end_idx = match.span()
 		if end_idx-start_idx == len(obj):
 			return cfg.get_composite_key(match.group(1))
-	'''
 	
 	new_string = ""
 	start_idx, end_idx = 0,-1
 	for match in matches:
 		span_start, span_end = match.span()
 		new_string += obj[start_idx:span_start]
-		new_string += cfg.get_composite_key(match.group(1))
+		new_string += str(cfg.get_composite_key(match.group(1)))
 		start_idx = span_end
 	new_string += obj[start_idx:]
 	return new_string
