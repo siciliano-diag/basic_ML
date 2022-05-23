@@ -8,7 +8,7 @@ from . import util_cfg
 def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 	for package_name in package_names:
 		print("IMPORTING",package_name)
-		try:
+		#try:
 			# if os.path.isdir(package_name):
 			setattr(self,package_name,__import__(package_name))
 			print("PACKAGE IMPORTED CORRECTLY")
@@ -21,8 +21,8 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 			# 		print("PACKAGE IMPORTED CORRECTLY")
 			# 	else:
 			# 		print("FILE NOT RECOGNIZED")
-		except ModuleNotFoundError:
-			print("PACKAGE", package_name, "NOT FOUND;", "CONTINUE PIPELINE")
+		#except ModuleNotFoundError:
+		#	print("PACKAGE", package_name, "NOT FOUND;", "CONTINUE PIPELINE")
 
 def load_data(self, *args, **kwargs):
 	return util_data.load_data(*args, **kwargs)
