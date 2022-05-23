@@ -50,7 +50,7 @@ def get_experiment_id(self, cfg):
 
 def get_set_experiment_id(self, cfg=None):
 	cfg = self.cfg if cfg is None else cfg
-	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = check_experiment(self,cfg)
+	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = get_experiment_id(self,cfg)
 	return exp_found
 
 def save_experiment(self):
