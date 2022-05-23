@@ -22,6 +22,7 @@ class Pipeline():
 	def run(self, start_cmd = 0, end_cmd = None, pipeline = None):
 		pipeline = self.pipeline if pipeline is None else pipeline
 
+		out = None
 		for command in pipeline[start_cmd:end_cmd]:
 			print("EXECUTING:", command)
 			if isinstance(command,str):
