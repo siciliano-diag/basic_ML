@@ -35,7 +35,8 @@ def check_experiment(self):
 		i = -1
 		with open(experiments_file, "r") as f:
 			for i,row in enumerate(f):
-				if self.cfg == row:
+				row_cfg = ConfigObject(json.loads(row))
+				if self.cfg == row_cfg:
 					found = True
 					experiment_id = i
 					if experiment_id!=0:
@@ -56,7 +57,8 @@ def save_experiment(self):
 
 	if self.exp["experiment_id"] == self.exp["tot_experiments"]: #NEW_EXPERIMENTS
 		with open(experiments_file,'a') as f:
-			f.write(self.cfg)
+			json.dump(self.cfg,f)
+			f.write("\n")
 	'''
 	else: #REPLACE EXPERIMENT
 		lines = open(experiments_file, 'r').readlines()
