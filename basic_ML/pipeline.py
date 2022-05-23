@@ -45,6 +45,7 @@ class Pipeline():
 					key = command_split[1]
 					sweep_params = self.cfg.get_composite_key(key)
 					for value in sweep_params:
+						print("Current sweep_params", sweep_params)
 						self.set_composite_key(key,value)
 						self.cfg.set_composite_key(key,value) #change configuration to save/check experiments
 						out = self.run(pipeline = command[command_name])
