@@ -63,6 +63,8 @@ def handle_additions(cfg, config_path):
 					raise FileNotFoundError("SPECIALIZED CFG NOT FOUND:"+os.path.join(config_path,key,value))
 				else:
 					print("SPECIALIZED CFG NOT FOUND, BUT OPTIONAL:",os.path.join(config_path,key,value))
+		elif isinstance(value,dict):
+			cfg[key] = handle_additions(value, config_path)
 	return cfg
 
 def handle_globals(cfg):
