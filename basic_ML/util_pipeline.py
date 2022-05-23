@@ -1,6 +1,7 @@
 #IMPORTS
 import types
 import os
+import json
 
 def set_to_self_methods(self, module):
 	#module = __import__(".", fromlist=[package_name])
