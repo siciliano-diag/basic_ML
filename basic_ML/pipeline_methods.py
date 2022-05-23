@@ -39,7 +39,7 @@ def check_experiment(self):
 				if self.cfg == row:
 					found = True
 					break
-		
+		self.exp["experiment_id"] = experiment_id
 		if found and not self.exp["rewrite"]:
 			return False
 		else:
