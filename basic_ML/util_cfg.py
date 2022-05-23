@@ -120,7 +120,6 @@ def merge_dicts(a, b, path=None):
 
 def handle_reference(cfg, obj, char="$"):
 	matches = [match for match in re.finditer(re.escape(char)+r"\{(.*?)\}",obj)]
-	print(matches)
 	if len(matches) == 1:
 		match = matches[0]
 		start_idx, end_idx = match.span()
