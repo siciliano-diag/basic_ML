@@ -27,29 +27,31 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 def load_data(self, *args, **kwargs):
 	return util_data.load_data(*args, **kwargs)
 
-def check_experiment(self):
+def get_experiment_id(self, cfg):
 	experiments_file = os.path.join(self.get_out_folder("exp"), self.exp["name"]+"_exp_list.jsonl")
-	if not os.path.isfile(experiments_file):
-		self.exp["experiment_id"] = 0
-	else:
-		found = False
-		experiment_id = 0
-		i = -1
+	experiment_id = 0
+	tot_experiments = 0
+	exp_found = False
+	if os.path.isfile(experiments_file):
 		with open(experiments_file, "r") as f:
 			for i,row in enumerate(f):
 				row_cfg = util_cfg.ConfigObject(json.loads(row))
-				if self.cfg == row_cfg:
-					found = True
+				if cfg == row_cfg:
+					exp_found = True
 					experiment_id = i
 					if experiment_id!=0:
 						print("!!!SAME CONFIG MULTIPLE TIMES?!!!")
-		self.exp["tot_experiments"] = i+1
-		if found:
-			self.exp["experiment_id"] = experiment_id
-			return True
-		else:
-			self.exp["experiment_id"] = self.exp["tot_experiments"]
-	return False
+	
+		if not exp_found:
+			experiment_id = tot_experiments
+	tot_experiments += 1
+
+	return exp_found, experiment_id, tot_experiments
+
+def get_set_experiment_id(self, cfg=None):
+	cfg = self.cfg if cfg is None else cfg
+	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = check_experiment(self,cfg)
+	return exp_found
 
 def save_experiment(self):
 	experiments_file = os.path.join(self.get_out_folder("exp"), self.exp["name"]+"_exp_list.jsonl")
