@@ -40,7 +40,6 @@ def check_experiment(self):
 					found = True
 					break
 		self.exp["experiment_id"] = experiment_id
-		if found and not self.exp["rewrite"]:
-			return False
-		else:
+		if found:
 			return True
+	return False
