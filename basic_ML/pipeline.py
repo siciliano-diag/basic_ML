@@ -1,5 +1,6 @@
 #IMPORTS
 import types
+import copy
 
 from . import util_cfg
 from . import util_pipeline #import set_to_self_methods
@@ -24,20 +25,19 @@ class Pipeline():
 
 		out = None
 		for command in pipeline[start_cmd:end_cmd]:
+			print("EXECUTING:", command)
 			if isinstance(command,str):
 				command_name, args, kwargs, outs = command, [], {}, []
 			elif isinstance(command,dict):
 				command_name = list(command.keys())[0]
 				if  isinstance(command[command_name],dict):
-					args = self.get_key_if_exists(command[command_name],"args",[])
-					kwargs = self.get_key_if_exists(command[command_name],"kwargs",{})
-					outs = self.get_key_if_exists(command[command_name],"outs",[])
+					args = self.get_key_if_exists(command[command_name],"args",[]).copy()
+					kwargs = self.get_key_if_exists(command[command_name],"kwargs",{}).copy()
+					outs = self.get_key_if_exists(command[command_name],"outs",[]).copy()
 				else:
 					args, kwargs, outs = [], {}, []
 			else:
 				print("ERROR: command not str or dict")
-			
-			print("EXECUTING:", command_name)
 
 			if " " in command_name: #check if special words
 				command_split = command_name.split(" ")
@@ -45,7 +45,6 @@ class Pipeline():
 					key = command_split[1]
 					sweep_params = self.cfg.get_composite_key(key)
 					for value in sweep_params:
-						print("Current sweep_params", sweep_params, key, value)
 						self.set_composite_key(key,value)
 						self.cfg.set_composite_key(key,value) #change configuration to save/check experiments
 						out = self.run(pipeline = command[command_name])
