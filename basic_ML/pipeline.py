@@ -88,10 +88,10 @@ class Pipeline():
 				else:
 					print("!!!KWARGS TYPE NOT RECOGNIZED!!!")
 
-				if hasattr(self, command_name):
-					out = self.get_composite_key(command_name)(*args, **kwargs)
-					if out is not None and len(outs)>0:
-						self.setattrs(outs,out)
-				else:
-					print("COMMAND NOT DEFINED")
+				# if hasattr(self, command_name):
+				out = self.get_composite_key(command_name)(*args, **kwargs)
+				if out is not None and len(outs)>0:
+					self.setattrs(outs,out)
+				# else:
+				# 	print("COMMAND NOT DEFINED")
 		return out
