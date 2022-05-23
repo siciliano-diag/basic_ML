@@ -36,6 +36,8 @@ def get_experiment_id(self, cfg):
 		with open(experiments_file, "r") as f:
 			for i,row in enumerate(f):
 				row_cfg = util_cfg.ConfigObject(json.loads(row))
+				print("LINE",row_cfg)
+				print("CFG", cfg)
 				if cfg == row_cfg:
 					exp_found = True
 					experiment_id = i
