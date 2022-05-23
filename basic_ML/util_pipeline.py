@@ -29,6 +29,13 @@ def get_key_if_exists(self, dct, key, error_value = None):
 	except KeyError:
 		return error_value
 
+def get_composite_attr(self, relative_key):
+	keys = relative_key.split(".")
+	value = getattr(self,keys[0])
+	for key in keys[1:]:
+		value = getattr(value,key)
+	return value
+
 def get_composite_key(self, relative_key):
 	keys = relative_key.split(".")
 	value = getattr(self,keys[0])
