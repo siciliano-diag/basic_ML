@@ -10,7 +10,7 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 			print("PACKAGE IMPORTED CORRECTLY")
 			if os.path.isdir(package_name):
 				print("IMPORTING SUBMODULES")
-				load_packages(getattr(self,package_name), *os.listdir(package_name))
+				load_packages(getattr(self,package_name), *[os.path.join(package_name,x) for x in os.listdir(package_name)])
 		except ModuleNotFoundError:
 			print("PACKAGE", package_name, "NOT FOUND;", "CONTINUE PIPELINE")
 
