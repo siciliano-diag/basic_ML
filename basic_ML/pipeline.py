@@ -79,10 +79,8 @@ class Pipeline():
 				else:
 					print("!!!ARGS TYPE NOT RECOGNIZED!!!")
 
-				print("KW",kwargs)
 				if isinstance(kwargs,dict):
-					for key,value in enumerate(kwargs.copy()): #handle references
-						print(key, value)
+					for key,value in kwargs.copy().items(): #handle references
 						if "~" in value:
 							kwargs[key] = util_cfg.handle_reference(self, value, "~")
 				#elif isinstance(kwargs,str):
