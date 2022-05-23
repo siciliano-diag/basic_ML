@@ -3,8 +3,7 @@ from ._version import __version__
 
 __all__ = [
     'pipeline',
-    '__version__'
-    ]
+    '__version__']
 
 
 #def app():
