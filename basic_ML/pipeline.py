@@ -70,11 +70,14 @@ class Pipeline():
 			else:
 				if isinstance(args,list):
 					for i,elem in enumerate(args): #handle references
+						print(elem)
 						if "~" in elem:
+							print("HEY",elem)
 							args[i] = util_cfg.handle_reference(self, elem, "~")
 				elif isinstance(args,str):
 					if "~" in args:
 						args = util_cfg.handle_reference(self, args, "~")
+					args = [args]
 				else:
 					print("!!!ARGS TYPE NOT RECOGNIZED!!!")
 
@@ -82,9 +85,9 @@ class Pipeline():
 					for key,value in enumerate(kwargs.copy()): #handle references
 						if "~" in value:
 							kwargs[key] = util_cfg.handle_reference(self, value, "~")
-				elif isinstance(kwargs,str):
-					if "~" in kwargs:
-						kwargs = util_cfg.handle_reference(self, kwargs, "~")
+				#elif isinstance(kwargs,str):
+				#	if "~" in kwargs:
+				#		kwargs = util_cfg.handle_reference(self, kwargs, "~")
 				else:
 					print("!!!KWARGS TYPE NOT RECOGNIZED!!!")
 
