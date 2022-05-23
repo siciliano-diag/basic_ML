@@ -30,10 +30,10 @@ def check_experiment(self):
 	if not os.path.isfile(experiments_file):
 		print("EXPERIMENT FILE NOT FOUND: INITIALIZE IT")
 		open(experiments_file, 'w').close()
-
 		self.exp["experiment_id"] = 0
 	else:
 		found = False
+		experiment_id = 0
 		with open(experiments_file, "r") as f:
 			for experiment_id,row in enumerate(f):
 				if self.cfg == row:
