@@ -1,5 +1,6 @@
 #IMPORTS
 import types
+import os
 
 def set_to_self_methods(self, module):
 	#module = __import__(".", fromlist=[package_name])
