@@ -10,8 +10,8 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 		print("IMPORTING",package_name)
 		#try:
 			# if os.path.isdir(package_name):
-			setattr(self,package_name,__import__(package_name))
-			print("PACKAGE IMPORTED CORRECTLY")
+		setattr(self,package_name,__import__(package_name))
+		print("PACKAGE IMPORTED CORRECTLY")
 
 			# 	print("IMPORTING SUBMODULES")
 			# 	load_packages(getattr(self,package_name), *[os.path.join(package_name,x) for x in os.listdir(package_name)])
