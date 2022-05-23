@@ -3,6 +3,7 @@ import os
 import json
 
 from . import util_data
+from . import util_cfg
 
 def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 	for package_name in package_names:
@@ -36,7 +37,7 @@ def check_experiment(self):
 		i = -1
 		with open(experiments_file, "r") as f:
 			for i,row in enumerate(f):
-				row_cfg = ConfigObject(json.loads(row))
+				row_cfg = util_cfg.ConfigObject(json.loads(row))
 				if self.cfg == row_cfg:
 					found = True
 					experiment_id = i
