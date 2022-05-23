@@ -64,7 +64,11 @@ def handle_additions(cfg, config_path):
 				else:
 					print("SPECIALIZED CFG NOT FOUND, BUT OPTIONAL:",os.path.join(config_path,key,value))
 		elif isinstance(value,dict):
-			cfg[key] = handle_additions(value, config_path)
+			additional_cfg = handle_additions(value, config_path)
+
+			cfg = raise_globals(cfg, additional_cfg)
+
+			cfg[key] = additional_cfg
 	return cfg
 
 def handle_globals(cfg):
