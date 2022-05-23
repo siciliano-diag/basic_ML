@@ -45,9 +45,10 @@ def get_composite_key(self, relative_key):
 
 def set_composite_key(self, relative_key, set_value):
 	keys = relative_key.split(".")
-	value = getattr(self,keys[0])
-	for i,key in enumerate(keys[1:-1]):
-		value = value.setdefault(key, {})
+	if len(keys)>1:
+		value = getattr(self,keys[0])
+		for i,key in enumerate(keys[1:-1]):
+			value = value.setdefault(key, {})
 	value[keys[-1]] = set_value
 
 def setattrs(self, attrs, values):
