@@ -30,11 +30,11 @@ def load_data(self, *args, **kwargs):
 def get_experiment_id(self, cfg):
 	experiments_file = os.path.join(self.get_out_folder("exp"), self.exp["name"]+"_exp_list.jsonl")
 	experiment_id = 0
-	tot_experiments = 0
+	tot_experiments = -1
 	exp_found = False
 	if os.path.isfile(experiments_file):
 		with open(experiments_file, "r") as f:
-			for i,row in enumerate(f):
+			for tot_experiments,row in enumerate(f):
 				row_cfg = util_cfg.ConfigObject(json.loads(row))
 				print("LINE",row_cfg)
 				print("CFG", cfg)
@@ -44,10 +44,10 @@ def get_experiment_id(self, cfg):
 					if experiment_id!=0:
 						print("!!!SAME CONFIG MULTIPLE TIMES?!!!")
 	
-		if not exp_found:
-			experiment_id = tot_experiments
 	tot_experiments += 1
-
+	if not exp_found:
+		experiment_id = tot_experiments
+	
 	return exp_found, experiment_id, tot_experiments
 
 def get_set_experiment_id(self, cfg=None):
@@ -65,6 +65,7 @@ def save_experiment(self):
 		with open(experiments_file,'a') as f:
 			json.dump(self.cfg,f)
 			f.write("\n")
+			
 	'''
 	else: #REPLACE EXPERIMENT
 		lines = open(experiments_file, 'r').readlines()
