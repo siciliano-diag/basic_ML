@@ -24,7 +24,6 @@ class Pipeline():
 
 		out = None
 		for command in pipeline[start_cmd:end_cmd]:
-			print("EXECUTING:", command)
 			if isinstance(command,str):
 				command_name, args, kwargs, outs = command, [], {}, []
 			elif isinstance(command,dict):
@@ -37,6 +36,8 @@ class Pipeline():
 					args, kwargs, outs = [], {}, []
 			else:
 				print("ERROR: command not str or dict")
+			
+			print("EXECUTING:", command_name)
 
 			if " " in command_name: #check if special words
 				command_split = command_name.split(" ")
