@@ -50,7 +50,9 @@ def set_composite_key(self, relative_key, set_value):
 		value = getattr(value,keys[0])
 		for i,key in enumerate(keys[1:-1]):
 			value = value.setdefault(key, {})
-	value[keys[-1]] = set_value
+		value[keys[-1]] = set_value
+	else:
+		setattr(value,keys[-1],set_value)
 
 def setattrs(self, attrs, values):
 	for key,value in zip(attrs,values):
