@@ -7,11 +7,18 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 	for package_name in package_names:
 		print("IMPORTING",package_name)
 		try:
-			setattr(self,package_name,__import__(package_name))
-			print("PACKAGE IMPORTED CORRECTLY")
 			if os.path.isdir(package_name):
+				setattr(self,package_name,__import__(package_name))
+				print("PACKAGE IMPORTED CORRECTLY")
+
 				print("IMPORTING SUBMODULES")
 				load_packages(getattr(self,package_name), *[".".join([package_name,x]) for x in os.listdir(package_name)])
+			else:
+				if package_name[-3:] == ".py":
+					setattr(self,package_name,__import__(package_name[:-3]))
+					print("PACKAGE IMPORTED CORRECTLY")
+				else:
+					print("FILE NOT RECOGNIZED")
 		except ModuleNotFoundError:
 			print("PACKAGE", package_name, "NOT FOUND;", "CONTINUE PIPELINE")
 
