@@ -71,8 +71,9 @@ class Pipeline():
 			else:
 				if isinstance(args,list):
 					for i,elem in enumerate(args): #handle references
-						if "~" in elem:
-							args[i] = util_cfg.handle_reference(self, elem, "~")
+						if isinstance(elem,str):
+							if "~" in elem:
+								args[i] = util_cfg.handle_reference(self, elem, "~")
 				elif isinstance(args,str):
 					if "~" in args:
 						args = util_cfg.handle_reference(self, args, "~")
@@ -82,8 +83,9 @@ class Pipeline():
 
 				if isinstance(kwargs,dict):
 					for key,value in kwargs.copy().items(): #handle references
-						if "~" in value:
-							kwargs[key] = util_cfg.handle_reference(self, value, "~")
+						if isinstance(value,str):
+							if "~" in value:
+								kwargs[key] = util_cfg.handle_reference(self, value, "~")
 				#elif isinstance(kwargs,str):
 				#	if "~" in kwargs:
 				#		kwargs = util_cfg.handle_reference(self, kwargs, "~")
