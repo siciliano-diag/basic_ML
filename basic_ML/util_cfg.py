@@ -74,9 +74,7 @@ def handle_additions(cfg, config_path):
 def handle_globals(cfg):
 	if "_global_" in cfg:
 		cfg = merge_dicts(cfg,cfg["_global_"])
-
 		cfg.pop("_global_",None)
-
 	return cfg
 
 def handle_relatives(obj, global_cfg):

@@ -40,7 +40,7 @@ def get_experiment_id(self, cfg):
 				print("CFG", cfg)
 				if cfg == row_cfg:
 					exp_found = True
-					experiment_id = i
+					experiment_id = tot_experiments
 					if experiment_id!=0:
 						print("!!!SAME CONFIG MULTIPLE TIMES?!!!")
 	
@@ -65,7 +65,7 @@ def save_experiment(self):
 		with open(experiments_file,'a') as f:
 			json.dump(self.cfg,f)
 			f.write("\n")
-			
+
 	'''
 	else: #REPLACE EXPERIMENT
 		lines = open(experiments_file, 'r').readlines()
@@ -74,4 +74,3 @@ def save_experiment(self):
 		out.writelines(lines)
 		out.close()
 	'''
-	
