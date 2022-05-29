@@ -27,8 +27,11 @@ def load_packages(self, *package_names): #IMPORT MODEL-SPECIFIC SCRIPTS
 def load_data(self, *args, **kwargs):
 	return util_data.load_data(*args, **kwargs)
 
-def get_experiment_id(self, cfg):
-	experiments_file = os.path.join(self.get_out_folder("exp"), self.exp["name"]+"_exp_list.jsonl")
+def get_experiment_id(self, cfg = None, experiment_name = None):
+	cfg = self.cfg if cfg is None else cfg
+	experiment_name = self.exp["name"] if experiment_name is None else experiment_name
+	
+	experiments_file = os.path.join(self.get_out_folder("exp"), experiment_name+"_exp_list.jsonl")
 	experiment_id = 0
 	tot_experiments = -1
 	exp_found = False
@@ -48,9 +51,11 @@ def get_experiment_id(self, cfg):
 	
 	return exp_found, experiment_id, tot_experiments
 
-def get_set_experiment_id(self, cfg=None):
+def get_set_experiment_id(self, cfg=None, experiment_name = None):
 	cfg = self.cfg if cfg is None else cfg
-	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = get_experiment_id(self,cfg)
+	experiment_name = self.exp["name"] if experiment_name is None else experiment_name
+
+	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = get_experiment_id(self, cfg, experiment_name)
 	return exp_found
 
 def save_experiment(self):
