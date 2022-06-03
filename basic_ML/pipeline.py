@@ -32,7 +32,9 @@ class Pipeline():
 				command_name = list(command.keys())[0]
 				if  isinstance(command[command_name],dict):
 					args = self.get_key_if_exists(command[command_name],"args",[]).copy()
-					kwargs = self.get_key_if_exists(command[command_name],"kwargs",{}).copy()
+					kwargs = self.get_key_if_exists(command[command_name],"kwargs",{})
+					if isinstance(kwargs,dict):
+						kwargs = kwargs.copy()
 					outs = self.get_key_if_exists(command[command_name],"outs",[]).copy()
 				else:
 					args, kwargs, outs = [], {}, []
