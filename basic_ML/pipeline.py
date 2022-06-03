@@ -71,6 +71,7 @@ class Pipeline():
 				else:
 					print("!!!SPECIAL COMMAND NOT RECOGNIZED!!!")
 			else:
+				print(args)
 				if isinstance(args,list):
 					for i,elem in enumerate(args): #handle references
 						if isinstance(elem,str):
@@ -95,6 +96,7 @@ class Pipeline():
 					print("!!!KWARGS TYPE NOT RECOGNIZED!!!")
 
 				# if hasattr(self, command_name):
+				print(args)
 				out = self.get_composite_attr(command_name)(*args, **kwargs)
 				if out is not None and len(outs)>0:
 					self.setattrs(outs,out)
