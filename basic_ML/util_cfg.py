@@ -33,7 +33,6 @@ def parse_arguments():
 	return vars(args)
 
 def load_yaml(config_path, config_name):
-	print(os.listdir(config_path))
 	with open(os.path.join(config_path,config_name+".yaml"), 'r') as f:
 		cfg = yaml.safe_load(f)
 

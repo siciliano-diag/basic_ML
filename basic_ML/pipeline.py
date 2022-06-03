@@ -86,9 +86,9 @@ class Pipeline():
 						if isinstance(value,str):
 							if "~" in value:
 								kwargs[key] = util_cfg.handle_reference(self, value, "~")
-				#elif isinstance(kwargs,str):
-				#	if "~" in kwargs:
-				#		kwargs = util_cfg.handle_reference(self, kwargs, "~")
+				elif isinstance(kwargs,str):
+					if "~" in kwargs:
+						kwargs = util_cfg.handle_reference(self, kwargs, "~")
 				else:
 					print("!!!KWARGS TYPE NOT RECOGNIZED!!!")
 
