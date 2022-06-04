@@ -1,3 +1,4 @@
+from . import model_utils
 from . import pipeline
 from ._version import __version__
 
