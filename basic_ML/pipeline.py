@@ -13,6 +13,7 @@ class Pipeline():
 		util_pipeline.set_to_self_methods(self, pipeline_methods)
 		util_pipeline.set_to_self_methods(self, model)
 
+
 		self.cfg = util_cfg.load_configuration()
 
 		self.set_cfg_to_self()
