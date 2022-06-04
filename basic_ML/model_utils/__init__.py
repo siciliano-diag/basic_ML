@@ -1,3 +1,3 @@
-from . import nn
+import nn
 
-#__all__ = ['nn']
+__all__ = ['nn']
