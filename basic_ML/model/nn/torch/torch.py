@@ -1,3 +1,5 @@
+import multiprocessing
+
 import torch
 import pytorch_lightning as pl
 
@@ -57,3 +59,37 @@ class BaseNN(pl.LightningModule):
 
     def test_step(self,batch,batch_idx):
         return self.step(batch,batch_idx,"test")
+
+
+def prepare_data_loaders(data, loader_params):
+    default_loader_params = {batch_size:128, num_workers: multiprocessing.cpu_count(), pin_memory: True, persistent_workers: True, drop_last: {"all": False, "train": True, "val": True, "test": False}}
+    loader_params = dict(list(default_loader_params.items()) + list(loader_params.items()))
+
+    loaders = {}
+    for split in ["all", "train", "val", "test"]:
+        if split+"_x" in data:
+            td = TensorDataset(torch.Tensor(data[split+"_x"]),torch.Tensor(data[split+"_y"]))
+            loaders[split] = DataLoader(td, **loader_params)
+    return loaders
+
+
+def prepare_callbacks(trainer_params):
+    callbacks = []
+    if "callbacks" in trainer_params:
+        for callback_name,callback_params in trainer_params["callbacks"].items():
+            callbacks.append(getattr(pl, callback_name)(**callbacks_params))
+    return callbacks
+
+def prepare_trainer(trainer_params):
+    default_trainer_params = {enable_checkpointing: False, logger: False, accelerator: "auto", devices: "auto"}
+    trainer_params = dict(list(default_trainer_params.items()) + list(trainer_params.items()))
+
+    trainer = pl.Trainer(**trainer_params)
+
+    return trainer
+
+def train_nn(trainer, model, loaders):
+    trainer.fit(model, loaders["train"], loaders["val"])
+    
+def test_nn(trainer, model, loaders):
+    trainer.test(model, testloader)
