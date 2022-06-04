@@ -5,7 +5,7 @@ import copy
 from . import util_cfg
 from . import util_pipeline #import set_to_self_methods
 from . import pipeline_methods
-import model_utils
+from . import model_utils
 
 class Pipeline():
 	def __init__(self):

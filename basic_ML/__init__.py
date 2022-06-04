@@ -1,8 +1,9 @@
-from . import pipeline
+#from . import pipeline
+import pipeline
 from ._version import __version__
 
 __all__ = [
-    'pipeline',
+    #'pipeline',
     '__version__']
 
 
