@@ -1,5 +1,5 @@
 from . import pipeline
-from . import model_utils
+import model_utils
 from ._version import __version__
 
 __all__ = [
