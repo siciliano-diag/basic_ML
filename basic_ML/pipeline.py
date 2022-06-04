@@ -5,13 +5,13 @@ import copy
 from . import util_cfg
 from . import util_pipeline #import set_to_self_methods
 from . import pipeline_methods
-from . import model_utils
+from . import model
 
 class Pipeline():
 	def __init__(self):
 		util_pipeline.set_to_self_methods(self, util_pipeline)
 		util_pipeline.set_to_self_methods(self, pipeline_methods)
-		util_pipeline.set_to_self_methods(self, model_utils)
+		util_pipeline.set_to_self_methods(self, model)
 
 		self.cfg = util_cfg.load_configuration()
 
