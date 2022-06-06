@@ -1,12 +1,12 @@
-from . import model_utils_app
-#from . import pipeline
+from . import model_utils
+from . import pipeline
 from ._version import __version__
 
 import os
 print(os.getcwd())
 
-__all__ = ["model_utils_app",
-    #'pipeline',
+__all__ = ["model_utils",
+    'pipeline',
     '__version__']
 
 
