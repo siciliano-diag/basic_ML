@@ -58,15 +58,21 @@ def get_set_experiment_id(self, cfg=None, experiment_name = None):
 	exp_found, self.exp["experiment_id"], self.exp["tot_experiments"] = get_experiment_id(self, cfg, experiment_name)
 	return exp_found
 
-def save_experiment(self):
-	experiments_file = os.path.join(self.get_out_folder("exp"), self.exp["name"]+"_exp_list.jsonl")
+def save_experiment(self, out_folder = None, experiment_name = None, experiment_id = None, tot_experiments = None, cfg = None):
+	out_folder = self.get_out_folder("exp") if out_folder is None else out_folder
+	experiment_name = self.exp["name"] if experiment_name is None else experiment_name
+	experiment_id = self.exp["experiment_id"] if experiment_id is None else experiment_id
+	tot_experiments = self.exp["tot_experiments"] if tot_experiments is None else tot_experiments
+	cfg = self.cfg if cfg is None else cfg
+
+	experiments_file = os.path.join(out_folder, experiment_name+"_exp_list.jsonl")
 	if not os.path.isfile(experiments_file):
 		print("EXPERIMENT FILE NOT FOUND: INITIALIZE IT")
 		open(experiments_file, 'w').close()
 
-	if self.exp["experiment_id"] == self.exp["tot_experiments"]: #NEW_EXPERIMENTS
+	if experiment_id == tot_experiments: #NEW_EXPERIMENTS
 		with open(experiments_file,'a') as f:
-			json.dump(self.cfg,f)
+			json.dump(cfg,f)
 			f.write("\n")
 
 	'''
