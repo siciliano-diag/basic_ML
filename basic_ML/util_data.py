@@ -36,14 +36,15 @@ def load_data(*args,**kwargs):
 			data[var] = np.concatenate(app, axis=0)
 	
 	#divide train/test if not already divided and test_size>0
-	if "x" in data and (kwargs["test_size"]>0 or kwargs["val_size"]>0):
+	if "x" in data:
 		for var in ["x","y"]:
 			data["train_"+var] = data[var]
 		
-		if kwargs["test_size"]>0:
-			data["train_x"], data["test_x"], data["train_y"], data["test_y"] = train_test_split(data["train_x"], data["train_y"], test_size = kwargs["test_size"], random_state = kwargs["seed"])
-		if kwargs["val_size"]>0:
-			data["train_x"], data["val_x"], data["train_y"], data["val_y"] = train_test_split(data["train_x"], data["train_y"], test_size = kwargs["val_size"], random_state = kwargs["seed"])
+	if kwargs["test_size"]>0 and "text_x" not in data:
+		data["train_x"], data["test_x"], data["train_y"], data["test_y"] = train_test_split(data["train_x"], data["train_y"], test_size = kwargs["test_size"], random_state = kwargs["seed"])
+		
+	if kwargs["val_size"]>0 and "val_x" not in data:
+		data["train_x"], data["val_x"], data["train_y"], data["val_y"] = train_test_split(data["train_x"], data["train_y"], test_size = kwargs["val_size"], random_state = kwargs["seed"])
 
 	if kwargs["standardize"]:
 		x_scaler = StandardScaler()
