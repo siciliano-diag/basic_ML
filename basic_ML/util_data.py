@@ -50,8 +50,8 @@ def load_data(*args,**kwargs):
 		x_scaler = StandardScaler()
 		data["train_x"] = x_scaler.fit_transform(data["train_x"])
 		for split in ["val","test"]:
-			if split in data:
-				data[split] = x_scaler.transform(data[split])
+			if split+"_x" in data:
+				data[split+"_x"] = x_scaler.transform(data[split+"_x"])
 	else:
 		x_scaler = None
 
