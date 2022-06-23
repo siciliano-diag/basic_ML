@@ -1,4 +1,5 @@
 #IMPORTS
+from copy import deepcopy
 import types
 import os
 
@@ -11,7 +12,7 @@ def set_to_self_methods(self, module):
 
 def set_cfg_to_self(self):
 	for key, value in self.cfg.items():
-		setattr(self, key, value)
+		setattr(self, key, deepcopy(value))
 	
 	if not hasattr(self, 'verbose'):
 		self.verbose = False

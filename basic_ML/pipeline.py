@@ -17,8 +17,8 @@ class Pipeline():
 		for key in ["exp","pipeline"]: #Pipeline and exp are not part of the config
 			del self.cfg[key] 
 
-		if self.verbose:
-			print(self.cfg)
+		#if self.verbose:
+		#	print(self.cfg)
 
 	def run(self, start_cmd = 0, end_cmd = None, pipeline = None):
 		pipeline = self.pipeline if pipeline is None else pipeline
