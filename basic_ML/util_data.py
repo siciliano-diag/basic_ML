@@ -23,12 +23,7 @@ def load_data(*args,**kwargs):
 
 	data = dataloader(kwargs["name"])
 
-	print("\n"*5, data["train_y"].shape)
-
 	check_y_shape(data)
-	print("\n"*5, data["train_y"].shape)
-
-
 
 	if "x" not in data and kwargs["re_split_test"]:
 		for var in ["x","y"]:
