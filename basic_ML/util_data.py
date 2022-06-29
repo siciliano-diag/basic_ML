@@ -23,7 +23,12 @@ def load_data(*args,**kwargs):
 
 	data = dataloader(kwargs["name"])
 
+	print("\n"*5, data["train_y"].shape)
+
 	check_y_shape(data)
+	print("\n"*5, data["train_y"].shape)
+
+
 
 	if "x" not in data and kwargs["re_split_test"]:
 		for var in ["x","y"]:
@@ -207,27 +212,27 @@ def check_y_shape(data):
 	elif "y" in data:
 		train_y, val_y, test_y = data["y"],None,None
 
-	if (train_y.shape[1]!=1) or (len(np.unique(train_y))>2) or (train_y.dtype not in ["int","float"]): #if 
-		enc = OneHotEncoder(sparse=False)
+	#if (train_y.shape[1]!=1) or (len(np.unique(train_y))>2) or (train_y.dtype not in ["int","float"]): #if 
+	enc = OneHotEncoder(sparse=False)
 
-		train_y = np.array(enc.fit_transform(train_y))
-		if val_y is not None:
-			val_y = np.array(enc.transform(val_y))
-		if test_y is not None:
-			test_y = np.array(enc.transform(test_y))
+	train_y = np.array(enc.fit_transform(train_y))
+	if val_y is not None:
+		val_y = np.array(enc.transform(val_y))
+	if test_y is not None:
+		test_y = np.array(enc.transform(test_y))
 
-		if train_y.shape[1]==2: #keep shape in (1,3,4,...)
-			train_y = train_y[:,1:]
-			if val_y is not None:
-				val_y = val_y[:,1:]
-			if test_y is not None:
-				test_y = test_y[:,1:]
-	elif train_y.shape[1]==1 and (not np.array_equal(np.unique(train_y),[0,1])): #if 
-		train_y = 1*(train_y==np.max(train_y))
-		if val_y is not None:
-			val_y = 1*(val_y==np.max(train_y))
-		if test_y is not None:
-			test_y = 1*(test_y==np.max(train_y))
+		# if train_y.shape[1]==2: #keep shape in (1,3,4,...)
+		# 	train_y = train_y[:,1:]
+		# 	if val_y is not None:
+		# 		val_y = val_y[:,1:]
+		# 	if test_y is not None:
+		# 		test_y = test_y[:,1:]
+	# elif train_y.shape[1]==1 and (not np.array_equal(np.unique(train_y),[0,1])): #if 
+	# 	train_y = 1*(train_y==np.max(train_y))
+	# 	if val_y is not None:
+	# 		val_y = 1*(val_y==np.max(train_y))
+	# 	if test_y is not None:
+	# 		test_y = 1*(test_y==np.max(train_y))
 
 	if "train_y" in data:
 		data["train_y"] = train_y
