@@ -53,7 +53,7 @@ class Pipeline():
 					self.cfg.set_composite_key(key,sweep_params) #revert key change to original sweep params
 				elif command_split[0]=="repeat":
 					num_repeats = int(command_split[1])
-					if not hasattr(self,repeats):
+					if not hasattr(self,"repeats"):
 						self.repeats = {} #self.repeats is needed to keep track of repeats in configurations
 					
 					repeat_key = len(self.repeats)
