@@ -54,15 +54,25 @@ class Pipeline():
 				elif command_split[0]=="repeat":
 					num_repeats = int(command_split[1])
 					if not hasattr(self,repeats):
-						self.repeats = {}
-					if len(command_split)>2:
-						repeat_key = command_split[2]
-					else:
-						repeat_key = len(self.repeats)
+						self.repeats = {} #self.repeats is needed to keep track of repeats in configurations
+					
+					repeat_key = len(self.repeats)
+					seed_key = None
+					if len(command_split)>2: #in case you want to overwrite/re-do a repeat?
+						seed_key = command_split[2]
+						if len(command_split)>3:
+							repeat_key = command_split[3]
 
+					if seed_key is not None:
+						initial_seed = self.get_composite_key(seed_key)
 					for repeat_i in range(num_repeats):
 						self.repeats[repeat_key] = repeat_i
 						out = self.run(pipeline = command[command_name])
+						if seed_key is not None:
+							self.set_composite_key(seed_key,self.get_composite_key(seed_key)+1)
+					if seed_key is not None:
+						self.set_composite_key(seed_key,initial_seed)
+
 					self.repeats.pop(repeat_key, None)
 				elif command_split[0]=="if":
 					bool_value = self.run(pipeline = [command_split[1]])
