@@ -60,4 +60,8 @@ def setattrs(self, attrs, values):
 		self.set_composite_key(key, value)
 
 def get_out_folder(self, out_type):
-	return os.path.join(self.exp["prj_fld"],'out',out_type)
+	out_folder = os.path.join(self.exp["prj_fld"],'out',out_type)
+	if not os.path.isdir(out_folder):
+		print(out_folder,"not found --> creating")
+		os.makedirs(out_folder)
+	return out_folder
